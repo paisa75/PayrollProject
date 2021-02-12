@@ -1,0 +1,6 @@
+debtor	1.10.100.1	300
+creditor	1.20.100.1	300
+debtor	1.10.100.1	300
+creditor	1.20.100.1	300
+debtor	1.10.100.1	300
+creditor	1.20.100.1	300
