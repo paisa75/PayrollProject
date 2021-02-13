@@ -70,7 +70,10 @@ public class Main {
                 if (line.contains(companyDepositNo)) {
                     String amount = line.replace(companyDepositNo, "");
                     amount = amount.replace("\t", "");
-                    companyBalance = new BigDecimal(amount);
+                    if (amount.equals("0"))
+                        companyBalance = BigDecimal.ZERO;
+                    else
+                        companyBalance = new BigDecimal(amount);
                     System.out.println("Company Balance is :" + companyBalance);
                 }
             }

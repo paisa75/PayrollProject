@@ -27,12 +27,12 @@ public class InventoryFile {
             String text = depositNo + "\t" + amount;
             boolean found = false;
             String newInput = "";
-            for (String li : inputStr.split("/n")) {
+            for (String li : inputStr.split("\n")) {
                 if (li.contains(depositNo)) {
                     li = text; // replace the line here
                     found = true;
                 }
-                newInput = newInput.concat(li);
+                newInput = newInput.concat(li + "\n");
             }
             if (!found) {
                 newInput = newInput.concat(text + "\n");
