@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,13 +37,8 @@ public class InventoryFile {
                 newInput = newInput.concat(text + "\n");
             }
             System.out.println(newInput);
-            // logic to replace lines in the string (could use regex here to be generic)
-            /*if (type.equals("0")) {
-                inputStr = inputStr.replace(replaceWith + "1", replaceWith + "0");
-            } else if (type.equals("1")) {
-                inputStr = inputStr.replace(replaceWith + "0", replaceWith + "1");
-            }
-*/
+
+
             // display the new file for debugging
             System.out.println("----------------------------------\n" + inputStr);
 
@@ -74,33 +68,4 @@ public class InventoryFile {
         }
     }
 
-//    public void updateBalance(String depositNo, BigDecimal amount) {
-//        try {
-//            // input the (modified) file content to the StringBuffer "input"
-//            BufferedReader file = new BufferedReader(new FileReader("inventoryFile.txt"));
-//            StringBuffer inputBuffer = new StringBuffer();
-//            String line;
-//            String text = depositNo + "\t" + amount;
-//            boolean found = false;
-//            while ((line = file.readLine()) != null) {
-//                if (line.contains(depositNo)) {
-//                    line = text; // replace the line here
-//                    found = true;
-//                }
-//                inputBuffer.append(line);
-//                inputBuffer.append('\n');
-//            }
-//            file.close();
-//
-//            // write the new string with the replaced line OVER the same file
-//            FileOutputStream fileOut = new FileOutputStream("inventoryFile.txt");
-//            if (found)
-//                fileOut.write(inputBuffer.toString().getBytes());
-//            else fileOut.write(text.getBytes());
-//            fileOut.close();
-//
-//        } catch (Exception e) {
-//            System.out.println("Problem reading file.");
-//        }
-//    }
 }
