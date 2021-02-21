@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 public class InventoryFile {
     private final Logger logger = Logger.getLogger(this.getClass());
 
-    public  void replaceSelected(InventoryFileDto param) {
+    public void replaceSelected(InventoryFileDto param) {
         try {
             // input the file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader("inventoryFile.txt"));
@@ -26,8 +26,9 @@ public class InventoryFile {
             file.close();
             String inputStr = inputBuffer.toString();
 
-            System.out.println(inputStr); // display the original file for debugging
-            //String text = depositNo + "\t" + amount;
+
+            logger.debug("****************: " + inputStr); // display the original file for debugging
+
             boolean found = false;
             String newInput = "";
             for (String li : inputStr.split("\n")) {
@@ -41,12 +42,11 @@ public class InventoryFile {
                 newInput = newInput.concat(param.toString() + "\n");
             }
             ////// use log4j
-            logger.debug("new input after changes in inventory file : "+newInput);
-            System.out.println(newInput);
+            logger.debug("new input after changes in inventory file : " + newInput);
 
 
             // display the new file for debugging
-            System.out.println("----------------------------------\n" + inputStr);
+            logger.debug("******************\n " + inputStr);
 
             // write the new string with the replaced line OVER the same file
             FileOutputStream fileOut = new FileOutputStream("inventoryFile.txt");
@@ -54,13 +54,13 @@ public class InventoryFile {
             fileOut.close();
 
         } catch (Exception e) {
-            System.out.println("Problem reading file.");
+            logger.debug("******************Problem reading file. ");
         }
 
 
     }
 
-    public BigDecimal getDepositBalance(String depositNo){
+    public BigDecimal getDepositBalance(String depositNo) {
         BigDecimal balance = BigDecimal.ZERO;
         Path file = Paths.get("inventoryFile.txt");
         try (InputStream in = Files.newInputStream(file);
@@ -77,7 +77,7 @@ public class InventoryFile {
                         balance = new BigDecimal(amount);
 
                     ////// here use log4j
-                    System.out.println("Company Balance is :" + balance);
+                    logger.debug("******************Company Balance is : " + balance);
                 }
             }
         } catch (IOException x) {
@@ -85,6 +85,7 @@ public class InventoryFile {
         }
         return balance;
     }
+
     public void createInventoryFile() {
         //initialize Path object
         Path path = Paths.get("inventoryFile.txt");
@@ -93,7 +94,6 @@ public class InventoryFile {
             String str = "1.10.100.1\t1000";
             byte[] bs = str.getBytes();
             Path writtenFilePath = Files.write(path, bs);
-            //System.out.println("Inventory is equal to:\n"+ new String(Files.readAllBytes(writtenFilePath)));
         } catch (Exception e) {
             e.printStackTrace();
         }

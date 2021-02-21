@@ -1,5 +1,6 @@
 package salary.payment.io;
 
+import salary.payment.model.dto.PaymentFileDto;
 import salary.payment.model.enums.Type;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.nio.file.StandardOpenOption;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class PaymentFile {
-    public void addToPaymentFile(Type type, String depositNumber, BigDecimal amount) {
+    public void addToPaymentFile(PaymentFileDto param) {
         // initialize Path object
         Path path = Paths.get("paymentFile.txt");
         //create file
@@ -20,7 +21,7 @@ public class PaymentFile {
 
             if (!Files.exists(path))
                 Files.createFile(path);
-            String text = type.name() + "\t" + depositNumber + "\t" + amount;
+            String text = param.toString();
             byte[] bs = text.getBytes();
             // Path writtenFilePath = Files.write(path, bs);
 
