@@ -33,9 +33,13 @@ public class InventoryFileDto {
     @Override
     public String toString() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return depositNo + "\t" + amount;
 =======
         return  depositNo +"\t" + amount ;
+>>>>>>> origin/main
+=======
+        return depositNo + "\t" + amount;
 >>>>>>> origin/main
     }
 }

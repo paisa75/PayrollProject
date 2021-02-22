@@ -43,9 +43,13 @@ public class TransactionFileDto {
     @Override
     public String toString() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return debtorDepositNo + "\t" + creditorDepositNo + "\t" + amount;
 =======
         return  debtorDepositNo +  "\t" + creditorDepositNo +  "\t" + amount ;
+>>>>>>> origin/main
+=======
+        return debtorDepositNo + "\t" + creditorDepositNo + "\t" + amount;
 >>>>>>> origin/main
     }
 }

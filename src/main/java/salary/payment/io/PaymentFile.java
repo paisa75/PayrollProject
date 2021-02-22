@@ -2,11 +2,15 @@ package salary.payment.io;
 
 import salary.payment.model.dto.PaymentFileDto;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 import salary.payment.model.enums.Type;
 
 import java.math.BigDecimal;
+>>>>>>> origin/main
+=======
+
 >>>>>>> origin/main
 import java.nio.file.Files;
 import java.nio.file.Path;

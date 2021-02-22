@@ -13,7 +13,7 @@ public class Main {
     private static final Logger logger = Logger.getLogger("Main.class");
 //    private static String companyDepositNo = "1.10.100.1";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         logger.debug("*********************** main class started");
         InventoryFile inventory = new InventoryFile();
         inventory.createInventoryFile();

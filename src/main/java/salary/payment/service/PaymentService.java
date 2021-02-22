@@ -11,6 +11,10 @@ public interface PaymentService {
 import java.util.concurrent.ExecutionException;
 
 public interface PaymentService {
+<<<<<<< HEAD
     public void doPayment(List<EmployeeSalary> employeeSalary) throws ExecutionException, InterruptedException;
+>>>>>>> origin/main
+=======
+    public void doPayment(List<EmployeeSalary> employeeSalary) throws ExecutionException, InterruptedException, Exception;
 >>>>>>> origin/main
 }
