@@ -2,6 +2,10 @@ package salary.payment.io;
 
 import salary.payment.model.dto.TransactionFileDto;
 
+<<<<<<< HEAD
+=======
+import java.math.BigDecimal;
+>>>>>>> origin/main
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +27,10 @@ public class TransactionFile {
                 Files.createFile(path);
             String text = param.toString();
             byte[] bs = text.getBytes();
+<<<<<<< HEAD
+=======
+            // Path writtenFilePath = Files.write(path, bs);
+>>>>>>> origin/main
 
             Files.write(path, (text + System.lineSeparator()).getBytes(UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
