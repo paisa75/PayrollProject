@@ -23,7 +23,6 @@ public class TransactionFile {
                 Files.createFile(path);
             String text = param.toString();
             byte[] bs = text.getBytes();
-            // Path writtenFilePath = Files.write(path, bs);
 
             Files.write(path, (text + System.lineSeparator()).getBytes(UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
