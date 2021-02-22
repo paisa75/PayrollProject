@@ -1,17 +1,7 @@
 package salary.payment.io;
 
 import salary.payment.model.dto.PaymentFileDto;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-import salary.payment.model.enums.Type;
-
-import java.math.BigDecimal;
->>>>>>> origin/main
-=======
-
->>>>>>> origin/main
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,17 +21,9 @@ public class PaymentFile {
                 Files.createFile(path);
             String text = param.toString();
             byte[] bs = text.getBytes();
-<<<<<<< HEAD
 
             Files.write(path, (text + System.lineSeparator()).getBytes(UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
-=======
-            // Path writtenFilePath = Files.write(path, bs);
-
-            Files.write(path, (text + System.lineSeparator()).getBytes(UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-
-            // System.out.println("Inventory is equal to:\n"+ new String(Files.readAllBytes(writtenFilePath)));
->>>>>>> origin/main
         } catch (Exception e) {
             e.printStackTrace();
         }
