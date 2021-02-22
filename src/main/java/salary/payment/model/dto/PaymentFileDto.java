@@ -8,7 +8,7 @@ public class PaymentFileDto {
 
     private String depositNo;
     private BigDecimal amount;
-    private Type type ;
+    private Type type;
 
     public PaymentFileDto() {
     }
@@ -45,7 +45,7 @@ public class PaymentFileDto {
 
     @Override
     public String toString() {
-        return  type.name() + "\t" + depositNo + "\t" + amount ;
+        return type.name() + "\t" + depositNo + "\t" + amount;
 
 
     }

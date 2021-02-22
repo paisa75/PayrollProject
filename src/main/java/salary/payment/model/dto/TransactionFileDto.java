@@ -42,6 +42,6 @@ public class TransactionFileDto {
 
     @Override
     public String toString() {
-        return  debtorDepositNo +  "\t" + creditorDepositNo +  "\t" + amount ;
+        return debtorDepositNo + "\t" + creditorDepositNo + "\t" + amount;
     }
 }

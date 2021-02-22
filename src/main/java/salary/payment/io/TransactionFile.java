@@ -2,7 +2,6 @@ package salary.payment.io;
 
 import salary.payment.model.dto.TransactionFileDto;
 
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -7,15 +7,13 @@ import salary.payment.service.PaymentServiceImpl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Main {
 
     private static final Logger logger = Logger.getLogger("Main.class");
 //    private static String companyDepositNo = "1.10.100.1";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         logger.debug("*********************** main class started");
         InventoryFile inventory = new InventoryFile();
         inventory.createInventoryFile();
@@ -33,23 +31,9 @@ public class Main {
         salary2.setAmount(BigDecimal.valueOf(700));
         employeeSalaryList.add(salary2);
 
-            PaymentService paymentService = new PaymentServiceImpl();
-            paymentService.doPayment(employeeSalaryList);
-            System.out.println("payment Don!!!!");
-
-
-
-
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-        executorService.execute(new Runnable() {
-            public void run() {
-                System.out.println("Asynchronous task");
-            }
-        });
-
-        executorService.shutdown();
+        PaymentService paymentService = new PaymentServiceImpl();
+        paymentService.doPayment(employeeSalaryList);
+        logger.debug("*********************** payment Don!!!!");
 
 
     }

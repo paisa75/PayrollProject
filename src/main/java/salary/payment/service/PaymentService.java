@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface PaymentService {
-    public void doPayment(List<EmployeeSalary> employeeSalary) throws ExecutionException, InterruptedException;
+    public void doPayment(List<EmployeeSalary> employeeSalary) throws ExecutionException, InterruptedException, Exception;
 }

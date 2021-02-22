@@ -11,17 +11,16 @@ import salary.payment.model.dto.TransactionFileDto;
 import salary.payment.model.enums.Type;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PaymentServiceImpl implements PaymentService {
 
     private final String companyDepositNo = "1.10.100.1";
 
     @Override
-    public void doPayment(List<EmployeeSalary> employeeSalaries) throws ExecutionException, InterruptedException {
+    public void doPayment(List<EmployeeSalary> employeeSalaries) throws Exception {
 
 
         final List<EmployeeSalary> emp = employeeSalaries;
@@ -38,18 +37,20 @@ public class PaymentServiceImpl implements PaymentService {
                 if (companyBalance.compareTo(sum) == -1) {
                     System.out.println("Company Balance is not Enough");
                     System.exit(0);
-//            throw new InsufficientInventoryException("Inventory is not enough",code);
+                    try {
+                        throw new InsufficientInventoryException("Inventory is not enough", 22);
+                    } catch (InsufficientInventoryException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 PaymentFile paymentFile = new PaymentFile();
                 TransactionFile transactionFile = new TransactionFile();
 
 
-
-
                 for (EmployeeSalary employeeSalary : emp) {
-                    paymentFile.addToPaymentFile(new PaymentFileDto(employeeSalary.getDepositNo(), employeeSalary.getAmount(),Type.creditor));
-                    InventoryFileDto dto = new InventoryFileDto(employeeSalary.getDepositNo(),employeeSalary.getAmount());
+                    paymentFile.addToPaymentFile(new PaymentFileDto(employeeSalary.getDepositNo(), employeeSalary.getAmount(), Type.creditor));
+                    InventoryFileDto dto = new InventoryFileDto(employeeSalary.getDepositNo(), employeeSalary.getAmount());
                     inventory.replaceSelected(dto);
                     transactionFile.createTransactionFile(new TransactionFileDto(companyDepositNo, employeeSalary.getDepositNo(), employeeSalary.getAmount()));
                 }

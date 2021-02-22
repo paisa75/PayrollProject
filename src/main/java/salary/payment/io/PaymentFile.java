@@ -1,9 +1,7 @@
 package salary.payment.io;
 
 import salary.payment.model.dto.PaymentFileDto;
-import salary.payment.model.enums.Type;
 
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

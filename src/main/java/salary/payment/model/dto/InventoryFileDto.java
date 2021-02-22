@@ -32,6 +32,6 @@ public class InventoryFileDto {
 
     @Override
     public String toString() {
-        return  depositNo +"\t" + amount ;
+        return depositNo + "\t" + amount;
     }
 }
