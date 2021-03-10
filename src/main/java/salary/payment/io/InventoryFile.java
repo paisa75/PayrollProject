@@ -1,6 +1,7 @@
 package salary.payment.io;
 
 import org.apache.log4j.Logger;
+import salary.payment.model.dto.EmployeeSalary;
 import salary.payment.model.dto.InventoryFileDto;
 
 import java.io.*;
@@ -8,11 +9,12 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class InventoryFile {
     private final Logger logger = Logger.getLogger(this.getClass());
 
-    public void replaceSelected(InventoryFileDto param) {
+    public void updateBalance(InventoryFileDto param) {
         try {
             // input the file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader("inventoryFile.txt"));
@@ -27,8 +29,6 @@ public class InventoryFile {
             String inputStr = inputBuffer.toString();
 
 
-            logger.debug("****************: " + inputStr); // display the original file for debugging
-
             boolean found = false;
             String newInput = "";
             for (String li : inputStr.split("\n")) {
@@ -41,12 +41,9 @@ public class InventoryFile {
             if (!found) {
                 newInput = newInput.concat(param.toString() + "\n");
             }
-            ////// use log4j
-            logger.debug("new input after changes in inventory file : " + newInput);
 
 
             // display the new file for debugging
-            logger.debug("******************\n " + inputStr);
 
             // write the new string with the replaced line OVER the same file
             FileOutputStream fileOut = new FileOutputStream("inventoryFile.txt");
@@ -76,7 +73,7 @@ public class InventoryFile {
                     else
                         balance = new BigDecimal(amount);
 
-                    ////// here use log4j
+
                     logger.debug("******************Company Balance is : " + balance);
                 }
             }
@@ -86,12 +83,19 @@ public class InventoryFile {
         return balance;
     }
 
-    public void createInventoryFile() {
+    public void createInventoryFile(List<EmployeeSalary> employeeSalaries) {
+        String str = "1.10.100.1\t500000\n";
+        String x = "";
+        for (EmployeeSalary employeeSalary : employeeSalaries) {
+            x = employeeSalary.getDepositNo() + "\t0\n";
+
+        }
+        str = str + x;
         //initialize Path object
         Path path = Paths.get("inventoryFile.txt");
         //create file
         try {
-            String str = "1.10.100.1\t1000";
+
             byte[] bs = str.getBytes();
             Path writtenFilePath = Files.write(path, bs);
         } catch (Exception e) {
