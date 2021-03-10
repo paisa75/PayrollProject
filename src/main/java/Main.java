@@ -8,6 +8,7 @@ import salary.payment.model.dto.PaymentFileDto;
 import salary.payment.model.dto.TransactionFileDto;
 import salary.payment.model.enums.Type;
 import salary.payment.service.PaymentServiceImpl;
+import salary.payment.thread.RunnableImpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class Main {
 
         //////////////////////// -5-  ////////////////////////////
         //////// Do Payment //////
-        inventory.updateBalance(new InventoryFileDto("1.10.100.1", companyBalance.subtract(sum)));
+     /*   inventory.updateBalance(new InventoryFileDto("1.10.100.1", companyBalance.subtract(sum)));
         TransactionFile transactionFile = new TransactionFile();
         for (EmployeeSalary employeeSalary : paymentList) {
             InventoryFileDto item = new InventoryFileDto(employeeSalary.getDepositNo(), employeeSalary.getAmount());
@@ -95,9 +96,10 @@ public class Main {
             inventory.updateBalance(item);
         }
 
-        logger.debug("*********************** payment Don!!!!");
+        logger.debug("*********************** payment Don!!!!");*/
         //////////////////////// -5-  ////////////////////////////
-
+        RunnableImpl runnable = new RunnableImpl();
+        runnable.run();
 
     }
 
