@@ -1,6 +1,6 @@
 package salary.payment.model.dto;
 
-import java.math.BigDecimal;
+        import java.math.BigDecimal;
 
 public class EmployeeSalary {
 
