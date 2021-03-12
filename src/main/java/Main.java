@@ -1,14 +1,11 @@
 import org.apache.log4j.Logger;
 import salary.payment.io.InventoryFile;
 import salary.payment.io.PaymentFile;
-import salary.payment.io.TransactionFile;
 import salary.payment.model.dto.EmployeeSalary;
-import salary.payment.model.dto.InventoryFileDto;
 import salary.payment.model.dto.PaymentFileDto;
-import salary.payment.model.dto.TransactionFileDto;
 import salary.payment.model.enums.Type;
 import salary.payment.service.PaymentServiceImpl;
-import salary.payment.thread.RunnableImpl;
+import salary.payment.thread.RunnableIm;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -88,18 +85,10 @@ public class Main {
 
         //////////////////////// -5-  ////////////////////////////
         //////// Do Payment //////
-     /*   inventory.updateBalance(new InventoryFileDto("1.10.100.1", companyBalance.subtract(sum)));
-        TransactionFile transactionFile = new TransactionFile();
-        for (EmployeeSalary employeeSalary : paymentList) {
-            InventoryFileDto item = new InventoryFileDto(employeeSalary.getDepositNo(), employeeSalary.getAmount());
-            transactionFile.createTransactionFile(new TransactionFileDto(companyDepositNo, employeeSalary.getDepositNo(), employeeSalary.getAmount()));
-            inventory.updateBalance(item);
-        }
-
-        logger.debug("*********************** payment Don!!!!");*/
+        RunnableIm runnableIm = new RunnableIm();
+        runnableIm.doPayment(companyDepositNo, employeeSalaryList);
         //////////////////////// -5-  ////////////////////////////
-        RunnableImpl runnable = new RunnableImpl();
-        runnable.run();
+
 
     }
 

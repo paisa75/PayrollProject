@@ -6,6 +6,8 @@ import salary.payment.model.dto.InventoryFileDto;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +49,8 @@ public class InventoryFile {
 
             // write the new string with the replaced line OVER the same file
             FileOutputStream fileOut = new FileOutputStream("inventoryFile.txt");
+            FileChannel fileChannel = fileOut.getChannel();
+            FileLock fileLock = fileChannel.lock();
             fileOut.write(newInput.getBytes());
             fileOut.close();
 
