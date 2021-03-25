@@ -12,15 +12,15 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RunnableIm {
+public class PaymentThread implements Runnable {
 
-    public void doPayment(String companyDeposit, List<EmployeeSalary> employeeSalaries) {
+    public void doPayment(final String companyDeposit, final List<EmployeeSalary> employeeSalaries) {
         PaymentServiceImpl paymentService = new PaymentServiceImpl();
-        InventoryFile inventory = new InventoryFile();
-        BigDecimal sum = paymentService.getAmountSum(employeeSalaries);
-        BigDecimal companyBalance = inventory.getDepositBalance(companyDeposit);
+        final InventoryFile inventory = new InventoryFile();
+        final BigDecimal sum = paymentService.getAmountSum(employeeSalaries);
+        final BigDecimal companyBalance = inventory.getDepositBalance(companyDeposit);
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ExecutorService executorService =  Executors.newFixedThreadPool(10);
         executorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -37,4 +37,9 @@ public class RunnableIm {
 
     }
 
+
+    @Override
+    public void run() {
+
+    }
 }

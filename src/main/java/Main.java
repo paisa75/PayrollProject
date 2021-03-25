@@ -5,7 +5,7 @@ import salary.payment.model.dto.EmployeeSalary;
 import salary.payment.model.dto.PaymentFileDto;
 import salary.payment.model.enums.Type;
 import salary.payment.service.PaymentServiceImpl;
-import salary.payment.thread.RunnableIm;
+import salary.payment.thread.PaymentThread;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class Main {
 
         //////////////////////// -5-  ////////////////////////////
         //////// Do Payment //////
-        RunnableIm runnableIm = new RunnableIm();
+        PaymentThread runnableIm = new PaymentThread();
         runnableIm.doPayment(companyDepositNo, employeeSalaryList);
         //////////////////////// -5-  ////////////////////////////
 
