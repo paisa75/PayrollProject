@@ -85,8 +85,10 @@ public class Main {
 
         //////////////////////// -5-  ////////////////////////////
         //////// Do Payment //////
-        PaymentThread runnableIm = new PaymentThread();
-        runnableIm.doPayment(companyDepositNo, employeeSalaryList);
+
+        PaymentThread paymentThread = new PaymentThread(companyDepositNo, employeeSalaryList);
+        Thread t = new Thread(paymentThread);
+        t.start();
         //////////////////////// -5-  ////////////////////////////
 
 
