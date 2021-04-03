@@ -1,4 +1,3 @@
-/*
 package salary.payment.thread;
 
 import salary.payment.io.InventoryFile;
@@ -11,19 +10,16 @@ import salary.payment.service.PaymentServiceImpl;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class PaymentThread implements Runnable {
+public class RunnableDemo implements Runnable{
     private String companyDeposit;
     private List<EmployeeSalary> employeeSalaries;
 
-    public PaymentThread(final String companyDeposit, final List<EmployeeSalary> employeeSalaries) {
+    public RunnableDemo(final String companyDeposit, final List<EmployeeSalary> employeeSalaries) {
         this.companyDeposit = companyDeposit;
         this.employeeSalaries = employeeSalaries;
     }
-
-
-
+    @Override
     public void run() {
-
         PaymentServiceImpl paymentService = new PaymentServiceImpl();
         final InventoryFile inventory = new InventoryFile();
         final BigDecimal sum = paymentService.getAmountSum(employeeSalaries);
@@ -36,6 +32,10 @@ public class PaymentThread implements Runnable {
             transactionFile.createTransactionFile(new TransactionFileDto(companyDeposit, employeeSalary.getDepositNo(), employeeSalary.getAmount()));
             inventory.updateBalance(item);
         }
+        try {
+            Thread.sleep(10);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }
-*/

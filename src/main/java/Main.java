@@ -5,11 +5,14 @@ import salary.payment.model.dto.EmployeeSalary;
 import salary.payment.model.dto.PaymentFileDto;
 import salary.payment.model.enums.Type;
 import salary.payment.service.PaymentServiceImpl;
-import salary.payment.thread.PaymentThread;
+//import salary.payment.thread.PaymentThread;
+import salary.payment.thread.RunnableDemo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 
@@ -86,14 +89,15 @@ public class Main {
         //////////////////////// -5-  ////////////////////////////
         //////// Do Payment //////
 
-        PaymentThread paymentThread = new PaymentThread(companyDepositNo, employeeSalaryList);
-        Thread t = new Thread(paymentThread);
-        t.start();
+//        PaymentThread paymentThread = new PaymentThread(companyDepositNo, employeeSalaryList);
+//        Thread t = new Thread(paymentThread);
+//        t.start();
         //////////////////////// -5-  ////////////////////////////
-
-
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        executorService.execute(new RunnableDemo(companyDepositNo,employeeSalaryList));
+        executorService.shutdown();
+        while (!executorService.isTerminated())
+        logger.debug("*****************Execution completed" );
     }
-
-
 }
 
