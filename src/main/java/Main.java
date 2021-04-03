@@ -96,7 +96,9 @@ public class Main {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         executorService.execute(new RunnableDemo(companyDepositNo,employeeSalaryList));
         executorService.shutdown();
-        while (!executorService.isTerminated())
+        while (!executorService.isTerminated()){
+
+        }
         logger.debug("*****************Execution completed" );
     }
 }
