@@ -1,5 +1,6 @@
 package salary.payment.thread;
 
+import org.apache.log4j.Logger;
 import salary.payment.io.InventoryFile;
 import salary.payment.io.TransactionFile;
 import salary.payment.model.dto.EmployeeSalary;
@@ -10,7 +11,9 @@ import salary.payment.service.PaymentServiceImpl;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class RunnableDemo implements Runnable{
+public class RunnableDemo implements Runnable {
+    private static final Logger logger = Logger.getLogger("Main.class");
+
     private String companyDeposit;
     private List<EmployeeSalary> employeeSalaries;
 
@@ -18,6 +21,7 @@ public class RunnableDemo implements Runnable{
         this.companyDeposit = companyDeposit;
         this.employeeSalaries = employeeSalaries;
     }
+
     @Override
     public void run() {
         PaymentServiceImpl paymentService = new PaymentServiceImpl();
@@ -32,9 +36,11 @@ public class RunnableDemo implements Runnable{
             transactionFile.createTransactionFile(new TransactionFileDto(companyDeposit, employeeSalary.getDepositNo(), employeeSalary.getAmount()));
             inventory.updateBalance(item);
         }
+        logger.debug("*****************Execution completed" + Thread.currentThread().getName() + ":" + employeeSalaries + companyDeposit);
+
         try {
             Thread.sleep(10);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
