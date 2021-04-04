@@ -95,10 +95,9 @@ public class Main {
 //        t.start();
         //////////////////////// -5-  ////////////////////////////
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        for (int i = 0; i < 10; i++) ;
-        {
-            executorService.execute(new RunnableDemo(companyDepositNo, employeeSalaryList));
-        }
+
+        executorService.execute(new RunnableDemo(companyDepositNo, employeeSalaryList));
+
         executorService.shutdown();
         while (!executorService.isTerminated()) {
 

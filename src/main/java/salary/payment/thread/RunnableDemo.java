@@ -36,7 +36,6 @@ public class RunnableDemo implements Runnable {
             transactionFile.createTransactionFile(new TransactionFileDto(companyDeposit, employeeSalary.getDepositNo(), employeeSalary.getAmount()));
             inventory.updateBalance(item);
         }
-        logger.debug("*****************Execution completed" + Thread.currentThread().getName() + ":" + employeeSalaries + companyDeposit);
 
         try {
             Thread.sleep(10);
