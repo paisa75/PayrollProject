@@ -1,16 +1,15 @@
 package salary.payment.io;
 
-        import salary.payment.model.dto.TransactionFileDto;
+import salary.payment.model.dto.TransactionFileDto;
 
-        import java.nio.file.Files;
-        import java.nio.file.Path;
-        import java.nio.file.Paths;
-        import java.nio.file.StandardOpenOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
-        import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class TransactionFile {
-
 
     public void createTransactionFile(TransactionFileDto param) {
         // initialize Path object
@@ -18,7 +17,6 @@ public class TransactionFile {
         //create file
 
         try {
-
             if (!Files.exists(path))
                 Files.createFile(path);
             String text = param.toString();

@@ -13,10 +13,10 @@ public class PaymentFileDto {
     public PaymentFileDto() {
     }
 
-    public PaymentFileDto(String depositNo, BigDecimal amount, Type type) {
+    public PaymentFileDto(String depositNo, BigDecimal amount) {
         this.depositNo = depositNo;
         this.amount = amount;
-        this.type = type;
+
     }
 
     public String getDepositNo() {
@@ -46,7 +46,5 @@ public class PaymentFileDto {
     @Override
     public String toString() {
         return type.name() + "\t" + depositNo + "\t" + amount;
-
-
     }
 }

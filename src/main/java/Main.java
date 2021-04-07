@@ -1,11 +1,10 @@
 import org.apache.log4j.Logger;
 import salary.payment.io.InventoryFile;
 import salary.payment.io.PaymentFile;
-import salary.payment.model.dto.EmployeeSalary;
 import salary.payment.model.dto.PaymentFileDto;
 import salary.payment.model.enums.Type;
 import salary.payment.service.PaymentServiceImpl;
-import salary.payment.thread.RunnableDemo;
+import salary.payment.thread.PaymentThread;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,41 +12,26 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-//import salary.payment.thread.PaymentThread;
-
 public class Main {
 
     private static final Logger logger = Logger.getLogger("Main.class");
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         logger.debug("*********************** main class started");
-        //////////////////////// -1-  ////////////////////////////
 
-
-        List<EmployeeSalary> employeeSalaryList = new ArrayList<>();
-
+        List<PaymentFileDto> paymentFileDtoList = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
-            EmployeeSalary employeeSalary = new EmployeeSalary();
-            employeeSalary.setId(i);
-            employeeSalary.setDepositNo("1.20.100." + i);
+            PaymentFileDto paymentFileDto = new PaymentFileDto();
+            paymentFileDto.setDepositNo("1.20.100." + i);
             if (i % 2 == 0)
-                employeeSalary.setAmount(BigDecimal.valueOf(300));
+                paymentFileDto.setAmount(BigDecimal.valueOf(300));
             else
-                employeeSalary.setAmount(BigDecimal.valueOf(700));
-
-            employeeSalaryList.add(employeeSalary);
-
+                paymentFileDto.setAmount(BigDecimal.valueOf(700));
+            paymentFileDtoList.add(paymentFileDto);
         }
-
-
         InventoryFile inventory = new InventoryFile();
-        inventory.createInventoryFile(employeeSalaryList);
+        inventory.createInventoryFile(paymentFileDtoList);
 
-
-        //////////////////////// -1-  ////////////////////////////
-
-
-        //////////////////////// -2-  ////////////////////////////
 
         PaymentFile paymentFile = new PaymentFile();
         PaymentFileDto dto = new PaymentFileDto();
@@ -57,50 +41,30 @@ public class Main {
         paymentFile.addToPaymentFile(dto);
 
 
-        for (EmployeeSalary x : employeeSalaryList) {
+        for (PaymentFileDto fileDto : paymentFileDtoList) {
             PaymentFileDto param = new PaymentFileDto();
-            param.setAmount(x.getAmount());
-            param.setDepositNo(x.getDepositNo());
+            param.setAmount(fileDto.getAmount());
+            param.setDepositNo(fileDto.getDepositNo());
             param.setType(Type.creditor);
             paymentFile.addToPaymentFile(param);
         }
 
-        //////////////////////// -2-  ////////////////////////////
 
-
-        //////////////////////// -3-  ////////////////////////////
         String companyDepositNo = "1.10.100.1";
         BigDecimal companyBalance = inventory.getDepositBalance(companyDepositNo);
         PaymentServiceImpl paymentService = new PaymentServiceImpl();
 
-        BigDecimal sum = paymentService.getAmountSum(employeeSalaryList);
+        BigDecimal sum = paymentService.getAmountSum(paymentFileDtoList);
         logger.debug("*****************The sum of the creditors' amounts is:" + sum);
-        paymentService.checkInventory(employeeSalaryList, companyBalance, sum);
+        paymentService.checkInventory(paymentFileDtoList, companyBalance, sum);
 
+        List<PaymentFileDto> fileDtoList = paymentFile.readPaymentFile();
 
-        //////////////////////// -3-  ////////////////////////////
-
-        //////////////////////// -4-  ////////////////////////////
-
-        List<EmployeeSalary> paymentList = paymentFile.readPaymentFile();
-
-        //////////////////////// -4-  ////////////////////////////
-
-
-        //////////////////////// -5-  ////////////////////////////
-        //////// Do Payment //////
-
-//        PaymentThread paymentThread = new PaymentThread(companyDepositNo, employeeSalaryList);
-//        Thread t = new Thread(paymentThread);
-//        t.start();
-        //////////////////////// -5-  ////////////////////////////
         ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        executorService.execute(new RunnableDemo(companyDepositNo, employeeSalaryList));
+        executorService.execute(new PaymentThread(companyDepositNo, paymentFileDtoList));
 
         executorService.shutdown();
-
         logger.debug("*****************Execution completed");
     }
 }
-

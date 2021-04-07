@@ -1,6 +1,5 @@
 package salary.payment.io;
 
-import salary.payment.model.dto.EmployeeSalary;
 import salary.payment.model.dto.PaymentFileDto;
 import salary.payment.model.enums.Type;
 
@@ -31,18 +30,15 @@ public class PaymentFile {
             String text =
                     param.toString();
             byte[] bs = text.getBytes();
-
             Files.write(path, (text + System.lineSeparator()).getBytes(UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
-    public List<EmployeeSalary> readPaymentFile() {
-        List<EmployeeSalary> employeeSalaries = new ArrayList<>();
+    public List<PaymentFileDto> readPaymentFile() {
+        List<PaymentFileDto> paymentFileDtoList = new ArrayList<>();
         Path file = Paths.get("paymentFile.txt");
         try (InputStream in = Files.newInputStream(file);
              BufferedReader reader =
@@ -54,16 +50,16 @@ public class PaymentFile {
                     String deposit = li.substring(0, li.indexOf("\t"));
                     String amount = li.substring(li.indexOf("\t") + 1);
                     amount = amount.replace("\t", "");
-                    EmployeeSalary employeeSalary = new EmployeeSalary();
-                    employeeSalary.setDepositNo(deposit);
-                    employeeSalary.setId(1);
-                    employeeSalary.setAmount(new BigDecimal(amount));
-                    employeeSalaries.add(employeeSalary);
+                    PaymentFileDto paymentFileDto = new PaymentFileDto();
+                    paymentFileDto.setDepositNo(deposit);
+                    paymentFileDto.setAmount(new BigDecimal(amount));
+                    paymentFileDtoList.add(paymentFileDto);
+
                 }
             }
         } catch (IOException x) {
             System.err.println(x);
         }
-        return employeeSalaries;
+        return paymentFileDtoList;
     }
 }

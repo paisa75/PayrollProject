@@ -1,8 +1,8 @@
 package salary.payment.io;
 
 import org.apache.log4j.Logger;
-import salary.payment.model.dto.EmployeeSalary;
 import salary.payment.model.dto.InventoryFileDto;
+import salary.payment.model.dto.PaymentFileDto;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ import java.util.List;
 public class InventoryFile {
     private final Logger logger = Logger.getLogger(this.getClass());
 
-    public void updateBalance(InventoryFileDto param) {
+    public synchronized void updateBalance(InventoryFileDto param) {
         try {
             // input the file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader("inventoryFile.txt"));
@@ -44,7 +44,6 @@ public class InventoryFile {
                 newInput = newInput.concat(param.toString() + "\n");
             }
 
-
             // display the new file for debugging
 
             // write the new string with the replaced line OVER the same file
@@ -57,7 +56,6 @@ public class InventoryFile {
         } catch (Exception e) {
             logger.debug("******************Problem reading file. ");
         }
-
 
     }
 
@@ -77,7 +75,6 @@ public class InventoryFile {
                     else
                         balance = new BigDecimal(amount);
 
-
                     logger.debug("******************Company Balance is : " + balance);
                 }
             }
@@ -87,11 +84,11 @@ public class InventoryFile {
         return balance;
     }
 
-    public void createInventoryFile(List<EmployeeSalary> employeeSalaries) {
+    public void createInventoryFile(List<PaymentFileDto> paymentFileDtos) {
         String str = "1.10.100.1\t500000\n";
         String x = "";
-        for (EmployeeSalary employeeSalary : employeeSalaries) {
-            x = employeeSalary.getDepositNo() + "\t0\n";
+        for (PaymentFileDto paymentFileDto : paymentFileDtos) {
+            x = paymentFileDto.getDepositNo() + "\t0\n";
 
         }
         str = str + x;
