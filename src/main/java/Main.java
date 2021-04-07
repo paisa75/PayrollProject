@@ -99,9 +99,7 @@ public class Main {
         executorService.execute(new RunnableDemo(companyDepositNo, employeeSalaryList));
 
         executorService.shutdown();
-        while (!executorService.isTerminated()) {
 
-        }
         logger.debug("*****************Execution completed");
     }
 }

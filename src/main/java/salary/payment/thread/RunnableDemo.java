@@ -1,15 +1,15 @@
 package salary.payment.thread;
 
-import org.apache.log4j.Logger;
-import salary.payment.io.InventoryFile;
-import salary.payment.io.TransactionFile;
-import salary.payment.model.dto.EmployeeSalary;
-import salary.payment.model.dto.InventoryFileDto;
-import salary.payment.model.dto.TransactionFileDto;
-import salary.payment.service.PaymentServiceImpl;
+        import org.apache.log4j.Logger;
+        import salary.payment.io.InventoryFile;
+        import salary.payment.io.TransactionFile;
+        import salary.payment.model.dto.EmployeeSalary;
+        import salary.payment.model.dto.InventoryFileDto;
+        import salary.payment.model.dto.TransactionFileDto;
+        import salary.payment.service.PaymentServiceImpl;
 
-import java.math.BigDecimal;
-import java.util.List;
+        import java.math.BigDecimal;
+        import java.util.List;
 
 public class RunnableDemo implements Runnable {
     private static final Logger logger = Logger.getLogger("Main.class");
